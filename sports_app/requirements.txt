@@ -1,7 +1,8 @@
 Django==4.2.6
 pytest-django
 pytest
-django-environ==0.9.0
+django-environ
 gunicorn==20.1.0
 psycopg2-binary==2.9.9
 djangorestframework
+flake8==5.0.4
