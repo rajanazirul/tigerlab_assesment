@@ -10,12 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
-from sports_app.constants import Environment as env
+from sports_app.constants import Environment
+import environ
+
+env = environ.Env(
+    HOST=(str, "http://localhost:8001"),
+    ENV=(str, Environment.DEVELOPMENT),
+    API_VERSION=(str, "1.1"),
+)
+
+isLocalEnv = env("ENV") == Environment.DEVELOPMENT
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+if isLocalEnv:
+    environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
