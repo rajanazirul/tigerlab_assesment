@@ -22,27 +22,73 @@
     </tr>
   </thead>
   <tbody>
-    
-<!-- {% if records %}
-	{% for record in records %}
-		<tr>
-			<td>{{ record.first_name }} {{ record.last_name }}</td>
-			<td>{{ record.email }}</td>
-			<td>{{ record.phone }}</td>
-			<td>{{ record.address }}</td>
-			<td>{{ record.city }}</td>
-			<td>{{ record.state }}</td>
-			<td>{{ record.zipcode }}</td>
-			<td>{{ record.created_at }}</td>
-			<td><a href="{% url 'record' record.id %}">{{ record.id }}</a></td>
-		</tr>
-	{% endfor %}
 
-{% endif %} -->
+    <div class="px-4 py-4">
+      <h1>Upload a File</h1>
+      <form id="fileUploadForm">
+        {% csrf_token %}
+        <label for="file">Select a file:</label>
+        <input type="file" name="file" id="file" required>
+        <br><br>
+        <input type="submit" value="Upload">
+      </form>
 
-	
-	  </tbody>
-	</table>
+      <script>
+        document.getElementById("fileUploadForm").addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Get the selected file
+          const fileInput = document.getElementById("file");
+          const file = fileInput.files[0];
+
+          if (!file) {
+            alert("Please select a file.");
+            return;
+          }
+
+          // Create a FormData object to send the file
+          const formData = new FormData();
+          formData.append("file", file);
+
+          // Make a POST request to your REST API
+          fetch("/storages/upload/", {
+            method: "POST",
+            body: formData,
+            headers: {
+              "X-CSRFToken": getCookie("csrftoken") // Include the CSRF token in the headers
+            }
+          })
+            .then(response => response.json())
+            .then(data => {
+              // Handle the API response here
+              console.log(data);
+            })
+            .catch(error => {
+              console.error("Error:", error);
+            });
+        });
+
+        // Function to retrieve the CSRF token from cookies
+        function getCookie(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie !== "") {
+            var cookies = document.cookie.split(";");
+            for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === name + "=") {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+              }
+            }
+          }
+          return cookieValue;
+        }
+      </script>
+    </div>
+
+
+  </tbody>
+</table>
 
 
 
@@ -51,26 +97,26 @@
 {% else %}
 
 <div class="col-md-6 offset-md-3">
-<h1>Login</h1>
-<br/>
+  <h1>Login</h1>
+  <br />
 
-<form method="POST" action="{% url 'home' %}">
-	{% csrf_token %}
+  <form method="POST" action="{% url 'home' %}">
+    {% csrf_token %}
 
-  <div class="mb-3">
-    <input type="text" class="form-control" name="username", placeholder="Username" required>
-    
-  </div><br/>
-  <div class="mb-3">
-    <input type="password" class="form-control" name="password", placeholder="Password" required>
-  </div>
-  <br/>
-  <button type="submit" class="btn btn-secondary">Login</button>
+    <div class="mb-3">
+      <input type="text" class="form-control" name="username" , placeholder="Username" required>
 
-</form>
+    </div><br />
+    <div class="mb-3">
+      <input type="password" class="form-control" name="password" , placeholder="Password" required>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-secondary">Login</button>
+
+  </form>
 
 
 
-{% endif %}
+  {% endif %}
 
-{% endblock %}
+  {% endblock %}
