@@ -6,8 +6,12 @@ Django Lab ranking asessement
     $ python -m venv venv
     $ source venv/bin/activate
 
-2. Add requirements.txt
+2. Install requirements.txt
+    $cd sports_app
+    $pip install -r requirements.txt
 
 3. Setup local database
     # Start docker instances
     $ docker-compose -f docker-compose.yml up -d
+
+4. 
