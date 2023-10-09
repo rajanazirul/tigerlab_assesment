@@ -18,11 +18,9 @@ class FileUploadViewSet(APIView):
             uploaded_file = serializer.validated_data["file"]
             serializer.save()
 
-            # validate if the file incoming file is csv
-
             # decode csv file
             data = uploaded_file.read().decode('UTF-8')
-            print(data)
+            # print(data)
 
             # run ranking service
 

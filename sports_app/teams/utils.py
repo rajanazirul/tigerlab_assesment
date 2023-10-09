@@ -28,4 +28,5 @@ class RankingService:
         for team in teams:
             ranking = self.ranking_calculator.calculate_ranking(team)
             # Save or display the ranking as needed
+            
         # ...
