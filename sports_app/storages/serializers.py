@@ -2,8 +2,8 @@ from rest_framework.serializers import Serializer, FileField
 
 
 # Serializers define the API representation.
-class UploadSerializer(Serializer):
-    file_uploaded = FileField()
+class FileUploadSerializer(Serializer):
+    file = FileField()
 
     class Meta:
-        fields = ["file_uploaded"]
+        fields = ["file"]
