@@ -29,6 +29,9 @@ class Match(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.home_team.name
+
     class Meta:
         verbose_name = "match"
         verbose_name_plural = "matches"
