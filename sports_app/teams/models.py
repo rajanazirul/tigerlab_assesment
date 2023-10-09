@@ -38,7 +38,7 @@ class Match(models.Model):
 
 class Ranking(models.Model):
     team = models.OneToOneField(Team, on_delete=models.CASCADE)
-    points = models.IntegerField()
+    points = models.IntegerField(default=0)
 
     class Meta:
         verbose_name = "ranking"
