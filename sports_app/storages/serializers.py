@@ -9,12 +9,8 @@ class FileUploadSerializer(ModelSerializer):
         fields = ["file"]
 
     def create(self, validated_data):
-        print(validated_data)
-
         uploaded_file = validated_data["file"]
         # validate if the file incoming file is csv
+        # if uploaded_file.name == ".csv"
 
-        # decode csv file
-        data = uploaded_file.read().decode('UTF-8')
-        print(data)
         return super().create(validated_data)
