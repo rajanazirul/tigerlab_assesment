@@ -22,9 +22,7 @@ class FileUploadViewSet(APIView):
             # decode csv file
             data = uploaded_file.read().decode('UTF-8')
 
-            # run ranking logic based on data
-
-            # save the logic on table
+            # run ranking service
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
