@@ -1,9 +1,9 @@
-from rest_framework.serializers import Serializer
+from rest_framework.serializers import ModelSerializer
 from .models import FileUpload
 
 
 # Serializers define the API representation.
-class FileUploadSerializer(Serializer):
+class FileUploadSerializer(ModelSerializer):
     class Meta:
         model = FileUpload
         fields = ["file"]
