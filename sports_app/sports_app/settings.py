@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     "website",
     "rest_framework",
     "storages",
+    "teams",
+
 ]
 
 MIDDLEWARE = [
