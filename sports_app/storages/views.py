@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework import status
 from rest_framework.views import APIView
+from .utils import FileUploadService
 
 
 # ViewSets define the view behavior.
@@ -18,8 +19,14 @@ class FileUploadViewSet(APIView):
             uploaded_file = serializer.validated_data["file"]
 
             # decode csv file
-            data = uploaded_file.read().decode('UTF-8')
-            print(data)
+            datas = uploaded_file.read().decode("UTF-8")
+            # Split the input data into rows
+            rows = datas.strip().split("\n")
+
+            for data in rows:
+                # run process csv file input
+                FileUploadService(data).process_match_input()
+
             serializer.save()
 
             # run ranking service
