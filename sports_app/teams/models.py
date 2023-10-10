@@ -12,6 +12,9 @@ class Team(models.Model):
         verbose_name_plural = "teams"
         db_table = "teams"
 
+    def __str__(self):
+        return self.name
+
 
 class Match(models.Model):
     home_team = models.ForeignKey(
