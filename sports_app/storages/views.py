@@ -14,6 +14,9 @@ class FileUploadViewSet(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
     def post(self, request):
+        """
+        API endpoint to upload and process CSV file 
+        """
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             uploaded_file = serializer.validated_data["file"]
