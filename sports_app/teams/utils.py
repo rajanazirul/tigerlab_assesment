@@ -1,4 +1,5 @@
-from .models import Team
+from .models import Team, Match
+from django.db.models import Q
 
 
 class RankingCalculator:
@@ -10,12 +11,10 @@ class RankingCalculator:
 class PointsRankingCalculator(RankingCalculator):
     def calculate_ranking(self, team):
         # Calculate the ranking based on points
-        pass
 
+        # query match related to team
+        matches = Match.objects.filter(Q(home_team=team) | Q(away_team=team))
 
-class GoalDifferenceRankingCalculator(RankingCalculator):
-    def calculate_ranking(self, team):
-        # Calculate the ranking based on goal difference
         pass
 
 
@@ -28,5 +27,5 @@ class RankingService:
         for team in teams:
             ranking = self.ranking_calculator.calculate_ranking(team)
             # Save or display the ranking as needed
-            
+
         # ...

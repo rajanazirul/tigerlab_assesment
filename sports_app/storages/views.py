@@ -27,7 +27,7 @@ class FileUploadViewSet(APIView):
                 # run process csv file input
                 FileUploadService(data).process_match_input()
 
-            serializer.save()
+            # serializer.save()
 
             # run ranking service
 
