@@ -1,4 +1,5 @@
 from teams.models import Team, Match
+from teams.utils import PointsRankingCalculator, RankingService
 
 
 class FileUploadService:
@@ -30,5 +31,9 @@ class FileUploadService:
             away_team=team2,
             away_score=away_score,
         )
+
+        # run ranking process
+        point = PointsRankingCalculator()
+        RankingService(points_ranking_calculator=point).calculate_rankings()
 
         return match.home_team
