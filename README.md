@@ -17,7 +17,8 @@ Programs needed:
 * `cd ..`
 * `docker-compose -f docker-compose.yml up -d`
 - If not setup docker, can refer this link for [Docker](https://www.docker.com/get-started/) installation.
-* `docker-compose -f docker-compose.yml up -d`
+* `cd sports_app`
+* `python3 manage.py migrate`
 * `python3 manage.py createsuperuser`
 * `python3 manage.py runserver`
 * can visit http://localhost:8000/
