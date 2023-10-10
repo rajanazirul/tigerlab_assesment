@@ -1,5 +1,6 @@
 from .models import Team, Match, Ranking
 from django.db.models import Q
+from .serializer import RankingSerializer
 
 
 class PointsRankingCalculator:
@@ -43,5 +44,18 @@ class RankingService:
             self.points_ranking_calculator.calculate_point(team)
 
         # display ranking in JSON format
-        rankings = Ranking.objects.all().order_by('-points', 'team')
-        return rankings
+        rankings = Ranking.objects.all().order_by("-points", "team")
+
+        serializer = RankingSerializer(rankings, many=True)
+
+        # Step 1: Sort the data by points in descending order
+        sorted_data = sorted(serializer.data, key=lambda x: x["points"])
+
+        # Step 2: Add ranking based on the sorted order
+        ranked_data = []
+        rank = 1
+        for entry in reversed(sorted_data):
+            entry_with_rank = {"team": entry["team"], "points": entry["points"], "rank": rank}
+            ranked_data.append(entry_with_rank)
+            rank += 1
+        return ranked_data
