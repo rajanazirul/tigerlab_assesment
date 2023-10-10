@@ -27,9 +27,8 @@ class FileUploadViewSet(APIView):
                 # run process csv file input
                 FileUploadService(data).process_match_input()
 
-            # serializer.save()
-
-            # run ranking service
+            # log csv data
+            serializer.save()
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
