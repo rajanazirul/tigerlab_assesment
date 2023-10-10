@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from .serializer import RankingSerializer
+from .utils import RankingService, PointsRankingCalculator
 from .models import Ranking
 from rest_framework import status
 from rest_framework.views import APIView
@@ -9,7 +10,8 @@ class TeamViewSet(APIView):
     serializer_class = RankingSerializer
 
     def get(self, request):
-        rankings = Ranking.objects.all().order_by('-points', 'team')
+        point = PointsRankingCalculator()
+        rankings = RankingService(points_ranking_calculator=point).calculate_rankings()
 
         serializer = self.serializer_class(data=rankings)
         if serializer.is_valid():
