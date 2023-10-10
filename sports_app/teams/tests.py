@@ -35,5 +35,5 @@ def test_ranking_positioning():
     point = PointsRankingCalculator()
     rankings = RankingService(points_ranking_calculator=point).calculate_rankings()
 
-    assert rankings[0].points == 6
-    assert rankings[4].points == 0
+    assert rankings[0]['points'] == 6
+    assert rankings[4]['points'] == 0
