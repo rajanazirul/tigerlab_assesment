@@ -55,7 +55,7 @@ class RankingService:
         ranked_data = []
         rank = 1
         for entry in reversed(sorted_data):
-            entry_with_rank = {"team": entry["team"], "points": entry["points"], "rank": rank}
+            entry_with_rank = {"team": entry["team"], "points": entry["points"], "rank": rank, "id": entry["id"]}
             ranked_data.append(entry_with_rank)
             rank += 1
         return ranked_data

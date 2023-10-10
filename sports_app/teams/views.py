@@ -2,9 +2,13 @@ from rest_framework.response import Response
 from .utils import RankingService, PointsRankingCalculator
 from rest_framework import status
 from rest_framework import generics
+from .models import Ranking
 
 
 class TeamViewSet(generics.GenericAPIView):
+    """
+    API endpoint that allows games view table.
+    """
 
     def get(self, request):
         point = PointsRankingCalculator()

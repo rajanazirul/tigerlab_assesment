@@ -15,4 +15,4 @@ class RankingSerializer(ModelSerializer):
 
     class Meta:
         model = Ranking
-        fields = ["team", "points"]
+        fields = ["team", "points", "id"]
