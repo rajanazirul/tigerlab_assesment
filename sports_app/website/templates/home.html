@@ -13,6 +13,7 @@
       <th scope="col">Ranking</th>
       <th scope="col">Team</th>
       <th scope="col">Points</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody id="table-body">
@@ -79,28 +80,44 @@
         }
 
         async function fetchDataAndPopulateTable() {
-            try {
-                const response = await fetch('/ranking/'); // Replace with your API endpoint
-                const data = await response.json();
+          try {
+            const response = await fetch('/ranking/'); // Replace with your API endpoint
+            const data = await response.json();
 
-                const tableBody = document.getElementById('table-body');
+            const tableBody = document.getElementById('table-body');
 
-                // Clear existing table rows
-                tableBody.innerHTML = '';
+            // Clear existing table rows
+            tableBody.innerHTML = '';
 
-                // Iterate through the data and create table rows
-                data.forEach((item, index) => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
+            // Iterate through the data and create table rows
+            data.forEach((item, index) => {
+              const row = document.createElement('tr');
+              row.innerHTML = `
                         <td>${index + 1}</td>
                         <td>${item.team}</td>
                         <td>${item.points}</td>
+                        <td>
+                            <button onclick="updateRow(${index})">Update</button>
+                            <button onclick="deleteRow(${index})">Delete</button>
+                        </td>
                     `;
-                    tableBody.appendChild(row);
-                });
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+              tableBody.appendChild(row);
+            });
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        }
+
+        // Function to handle row update
+        function updateRow(index) {
+          // Implement the update logic here for the selected row
+          console.log(`Update button clicked for row ${index}`);
+        }
+
+        // Function to handle row deletion
+        function deleteRow(index) {
+          // Implement the delete logic here for the selected row
+          console.log(`Delete button clicked for row ${index}`);
         }
 
         // Call the function to populate the table when the page loads
